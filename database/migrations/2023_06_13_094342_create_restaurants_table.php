@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('activity_name');
             $table->string('slug');
-            $table->string('phone_number', 15)->unique();
+            $table->string('phone_number', 25)->unique();
             $table->string('address');
             $table->string('vat', 15)->unique();
             $table->text('cover_image');
