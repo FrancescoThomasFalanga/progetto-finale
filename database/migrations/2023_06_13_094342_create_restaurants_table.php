@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('activity_name');
             $table->string('slug');
-            $table->string('phone_number', 25)->unique();
+            $table->string('phone_number', 50)->unique();
             $table->string('address');
             $table->string('vat', 15)->unique();
             $table->text('cover_image');
