@@ -6,23 +6,62 @@
         
         @foreach ($dishes as $dish)
             <div class="card" style="width: 18rem;">
-                <img src="{{ $dish->cover_image }}" class="card-img-top" alt="...">
+
+                @if ($dish->cover_image != 'https://static.vecteezy.com/ti/vettori-gratis/p1/5359703-cibo-icone-pixel-perfetto-illustrazione-vettoriale.jpg')
+                  <img src="{{ asset('storage/' . $dish->cover_image) }}" class="card-img-top" alt="...">
+                @else
+                  <img src="{{ $dish->cover_image }}" class="card-img-top" alt="...">
+                @endif
+
                 <div class="card-body">
                     <h5 class="card-title">{{ $dish->name }}</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                    <p class="card-text">{{ $dish->description }}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">Prezzo: {{ $dish->price }}€</li>
+                    <li class="list-group-item">Disponibilità: {{ $dish->availability ? 'Disponibile' : 'Non disponibile' }}</li>
+                    <li class="list-group-item">Intolleranza: {{ $dish->intolerance == null ? '/' : $dish->intolerance  }}</li>
                 </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                <div class="card-body d-flex gap-3 align-items-center ">
+                    <a href="{{ route('admin.dishes.edit', $dish->slug) }}" class="card-link btn btn-primary fw-bold">Modifica piatto</a>
+
+                    <form action="{{route('admin.dishes.destroy', $dish->slug)}}" method="POST">
+            
+                        @csrf
+                        @method('DELETE')
+            
+                        <button class="btn btn-danger fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Elimina
+                        </button>
+              
+                        <div class="modal fade text-primary" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-4" id="exampleModalLabel">Elimina piatto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Sicuro di voler eliminare il piatto?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary delete-btn" data-bs-dismiss="modal">CHIUDI<span></span></button>
+                                <button type="submit" class="btn btn-secondary">ELIMINA<span></span></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                    </form>
                 </div>
             </div>
         @endforeach
+
+    </div>
+
+    <div class="container">
+
+      <a class="btn btn-primary" href="{{ route('admin.dishes.create') }}">Aggiungi un piatto</a>
 
     </div>
 @endsection
