@@ -9,6 +9,8 @@ class Type extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'icon_path'];
+
     public function restaurants() {
 
         return $this->belongsToMany(Restaurant::class);
