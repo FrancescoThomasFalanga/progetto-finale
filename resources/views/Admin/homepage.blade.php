@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2 class="fs-4 text-secondary my-4">
-        {{ __('Dashboard') }}
+        {{ __('Homepage') }}
     </h2>
     <div class="row justify-content-center">
         <div class="col">
@@ -18,6 +18,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                </div>
+                <div class="container">
+                    <a href="{{route('admin.restaurants.index')}}">Il tuo ristorante</a>
+                    <a href="{{route('admin.')}}"></a>
                 </div>
             </div>
         </div>
