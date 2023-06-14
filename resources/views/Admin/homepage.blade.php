@@ -21,7 +21,6 @@
                 </div>
                 <div class="container">
                     <a href="{{route('admin.restaurants.index')}}">Il tuo ristorante</a>
-                    <a href="{{route('admin.')}}"></a>
                 </div>
             </div>
         </div>
