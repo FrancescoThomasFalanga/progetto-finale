@@ -26,7 +26,7 @@
 
                 </p>
                
-                <a href="{{ route('admin.dishes.index', 'id=' . $restaurants) }}" class="btn btn-primary">Vai al Menu</a>
+                <a href="{{ route('admin.dishes.index') }}" class="btn btn-primary">Vai al Menu</a>
             </div>
         </div>
     @endsection
