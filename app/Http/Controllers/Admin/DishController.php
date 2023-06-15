@@ -133,6 +133,11 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
+
+        if($dish->cover_image){
+            Storage::delete($dish->cover_image);
+        }
+        
         $dish->delete();
 
         return redirect()->route('admin.dishes.index');
