@@ -18,15 +18,14 @@
                     <li class="list-group-item">Prezzo: {{ $dish->price }}€</li>
                     <li class="list-group-item">Disponibilità: {{ $dish->availability ? 'Disponibile' : 'Non disponibile' }}
                     </li>
-                    <li class="list-group-item">Intolleranza: {{ $dish->intolerance == null ? '/' : $dish->intolerance }}
+                    <li class="list-group-item">Intolleranza: {{ $dish->intolerance == null ? 'Nessuna' : $dish->intolerance }}
                     </li>
                 </ul>
                 <div class="card-body d-flex gap-3 align-items-center ">
                     <a href="{{ route('admin.dishes.edit', $dish->slug) }}"
                         class="card-link btn btn-primary fw-bold">Modifica piatto</a>
 
-                    <button class="btn btn-danger fw-bold" type="button" data-bs-toggle="modal"
-                        data-bs-target="#dishModal{{ $dish->id }}">
+                    <button class="btn btn-danger fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#dishModal{{ $dish->id }}">
                         Elimina
                     </button>
                 </div>
