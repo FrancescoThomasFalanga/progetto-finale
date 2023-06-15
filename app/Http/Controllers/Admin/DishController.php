@@ -166,6 +166,11 @@ class DishController extends Controller
             $stringIntolerances = implode(", ",$intolerances);
             $dish->intolerance = $stringIntolerances;
             
+        } else{
+
+            $formData['intolerance'] = null;
+            $dish->intolerance =$formData['intolerance'];
+            
         }
 
         $dish->save();
