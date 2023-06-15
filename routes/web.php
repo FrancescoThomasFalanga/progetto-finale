@@ -40,6 +40,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('types', TypeController::class);
 
     Route::resource('orders', OrderController::class);
+
+    Route::get('/404', [HomeController::class, 'notFound'])->name('notFound');
     
 });
 
