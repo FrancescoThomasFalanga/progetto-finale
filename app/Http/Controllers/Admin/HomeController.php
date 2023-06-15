@@ -12,4 +12,10 @@ class HomeController extends Controller
         return view('admin.homepage');
 
     }
+
+    public function notFound() {
+
+        return view('admin.notFound');
+
+    }
 }
