@@ -39,14 +39,19 @@
             </div>
             @enderror
 
-            <label for="availability" class="pt-5">Disponibilità:</label>
-            <input name="availability" id="availability" type="text" class="form-control input @error('availability') is-invalid @enderror" value="{{old('availability') ?? $dish->availability}}">
-            @error('availability')
-            <div class="invalid-feedback mb-3 mt-0">
-                {{$message}}
-            </div>
-            @enderror
-        
+                <label for="availability" class="pt-5">Disponibilità:</label>
+                <select name="availability" id="availability" class="form-select @error('availability') is-invalid @enderror"
+                    aria-label="Default select example">
+                    <option selected>Seleziona</option>
+                    <option value="1" @if (old('availability', $dish->availability) == '1') selected @endif>Disponibile</option>
+                    <option value="0" @if (old('availability', $dish->availability) == '0') selected @endif>Non Disponibile</option>
+                </select>
+                @error('availability')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+
             <label for="intolerance" class="pt-5">Intolleranze:</label>
             <input name="intolerance" id="intolerance" type="text" class="form-control input @error('intolerance') is-invalid @enderror" value="{{old('intolerance') ?? $dish->intolerance}}">
             @error('intolerance')
