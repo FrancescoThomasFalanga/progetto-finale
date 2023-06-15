@@ -24,6 +24,7 @@ class DishController extends Controller
         $restaurant = Restaurant::where('user_id', $user)->first();
         $restaurantID = $restaurant->id;
         $dishes = Dish::where('restaurant_id', $restaurantID)->get();
+
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -92,7 +93,22 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        return view('admin.dishes.edit', compact('dish'));
+
+        $user = Auth::id();
+        $restaurant = Restaurant::where('user_id', $user)->first();
+        $restaurantID = $restaurant->id;
+        $dishes = Dish::where('restaurant_id', $restaurantID)->first();
+        
+        if($dishes == null) {
+
+            return redirect()->route('admin.notFound');
+
+        } else {
+
+            return view('admin.dishes.edit', compact('dish'));
+
+        }
+
     }
 
     /**
@@ -110,8 +126,9 @@ class DishController extends Controller
         $restaurantID = $restaurant->id;
         $dishes = Dish::where('restaurant_id', $restaurantID)->get();
 
-
         $formData = $request->all();
+        
+        // dd($formData);
 
         if ($request->hasFile('cover_image')) {
             $path = Storage::put('restaurantImages', $request->cover_image);
@@ -121,6 +138,7 @@ class DishController extends Controller
         $dish->slug = Str::slug($formData['name'], '-');
 
         $dish->update($formData);
+
 
         return redirect()->route('admin.dishes.index', compact('dishes'));
     }
