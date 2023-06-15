@@ -8,6 +8,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
@@ -51,6 +52,8 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
         $formData = $request->all();
+
+        $this->validation($formData);
 
         $restaurant = new Restaurant();
 
@@ -115,5 +118,38 @@ class RestaurantController extends Controller
     public function destroy(Restaurant $restaurant)
     {
         //
+    }
+
+    private function validation($formData) {
+
+        $validator = Validator::make($formData,
+        [
+            'activity_name'=> 'required',
+            'phone_number'=> 'required|max:50|unique:restaurants,phone_number',
+            'address'=> 'required',
+            'vat'=> 'required|min:11|max:15|unique:restaurants,vat',
+            'cover_image'=>'required|image|max:4096',
+            'types' => 'required|array',
+            'types.*' => 'exists:types,id',
+        ],
+        [
+            'activity_name.required'=> 'Questo campo non può essere lasciato vuoto',
+            'phone_number.required'=> 'Questo campo non può essere lasciato vuoto',
+            'phone_number.max'=> 'Numero di telefono troppo lungo',
+            'phone_number.unique' => 'Il numero di telefono è già stato preso',
+            'address' => 'Questo campo non può essere lasciato vuoto',
+            'vat.required' => 'Questo campo non può essere lasciato vuoto',
+            'vat.min' => 'La partita IVA non deve essere inferiore a 11 caratteri',
+            'vat.max' => 'La partita IVA non deve superare i 15 caratteri',
+            'vat.unique' => 'Non puoi usare questa partita IVA',
+            'cover_image.required' => "Devi caricare un'immagine",
+            'cover_image.image' => 'Il file deve essere una immagine',
+            'cover_image.max' =>  'Il file è troppo grande',
+            'types.required' => 'Questo campo non può essere lasciato vuoto',
+            'types.exists' => 'Il valore non è presente',
+        ])->validate();
+
+        return $validator;
+
     }
 }
