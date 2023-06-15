@@ -144,6 +144,11 @@ class DishController extends Controller
         $this->validation($formData);
 
         if ($request->hasFile('cover_image')) {
+
+            if ($dish->cover_image) {
+                Storage::delete($dish->cover_image);
+            }
+
             $path = Storage::put('restaurantImages', $request->cover_image);
             $formData['cover_image'] = $path;
         }
