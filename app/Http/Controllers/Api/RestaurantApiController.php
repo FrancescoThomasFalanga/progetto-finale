@@ -11,19 +11,52 @@ class RestaurantApiController extends Controller
 {
     public function index(Request $request)
     {
-        $restaurant = Restaurant::with('dishes', 'types')
-            ->paginate(6);
-        // $formData = $request->all();
+        $requestData = $request->all();
 
-        // if ($request->has('activity_name') && $formData['activity_name'] != "") {
-        //     $restaurant = Restaurant::where('activity_name', 'like', "%$formData[activity_name]%")->get();
-        // }
+        // $modello = new Restaurant();
+
+        // dd($modello->types());
+    //     $result = DB::table('restaurants')
+    // ->join('restaurant_type', 'restaurants.id', '=', 'restaurant_type.restaurant_id')
+    // ->join('types', 'restaurant_type.type_id', '=', 'types.id')
+    // ->where('types.id', 1)
+    // ->select('restaurants.*')
+    // ->get();
+
         $types = Type:: all();
+        
+
+        if($request->has('type_id') && $requestData['type_id']){
+            $restaurant = Restaurant::with('dishes', 'types')
+            ->join('restaurant_type', 'restaurants.id', '=', 'restaurant_type.restaurant_id')
+            ->join('types', 'restaurant_type.type_id', '=', 'types.id')
+            ->where('types.id', $requestData['type_id'] )
+            ->paginate(6);
+
+            if(count($restaurant) == 0) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'A questa tipologia non corrisponde nessun ristorante',
+                ]);
+            }
+        }else{
+
+            $restaurant = Restaurant::with('dishes', 'types')
+                ->paginate(6);
+            
+        }
+        
         return response()->json([
             'success' => true,
             'results' => $restaurant,
             'types' => $types
         ]);
+
+        // if ($request->has('activity_name') && $formData['activity_name'] != "") {
+        //     $restaurant = Restaurant::where('activity_name', 'like', "%$formData[activity_name]%")->get();
+        // }
+        // dd($formData);
+
     }
     public function show($slug)
     {
