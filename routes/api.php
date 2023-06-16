@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DishApiController;
 use App\Http\Controllers\Api\ResturantApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('resturant', [ResturantApiController::class, 'index']);
 Route::get('resturant/{slug}', [ResturantApiController::class, 'show']);
+Route::get('resturant/{slug}/dishes', [DishApiController::class, 'index']);
+// Route::get('resturant/{slug}/dish/{slug}', [DishApiController::class, 'show']);
