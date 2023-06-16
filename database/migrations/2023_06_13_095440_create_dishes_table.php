@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 5, 2);
             $table->boolean('availability');
-            $table->string('intolerance', 50)->nullable();
+            $table->string('intolerance', 100)->nullable();
             $table->text('cover_image');
             $table->timestamps();
         });
@@ -37,6 +37,5 @@ return new class extends Migration
     {
 
         Schema::dropIfExists('dishes');
-        
     }
 };
