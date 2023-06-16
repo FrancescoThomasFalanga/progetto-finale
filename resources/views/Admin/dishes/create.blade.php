@@ -2,6 +2,17 @@
 
 @section('content')
 
+@php
+$intolerances = ['Glutine',
+    'Lattosio',
+    'Uova',
+    'Crostacei',
+    'Frutta-secca',
+    'Soia',
+    'Pesce',
+    'Nichel',]
+@endphp
+
     <div class="go-back-btn text-center d-flex justify-content-center align-items-center gap-4" style="margin-top:100px">
 
         <h2 class="mb-0 green text-uppercase">Crea Piatto</h2>
@@ -14,8 +25,8 @@
             @csrf
     
     
-            <label class="pt-5" for="name">Nome:</label>
-            <input name="name" id="name" type="text" class="form-control input @error('name') is-invalid @enderror" value="{{old('name')}}">
+            <label class="pt-5" for="name">*Nome:</label>
+            <input name="name" id="name" type="text" class="form-control input @error('name') is-invalid @enderror" value="{{old('name')}}" required>
             @error('name')
             <div class="invalid-feedback mb-3 mt-0">
                 {{$message}}
@@ -30,17 +41,17 @@
             </div>
             @enderror
         
-            <label for="price" class="pt-5">Prezzo:</label>
-            <input name="price" id="price" type="text" class="form-control input @error('price') is-invalid @enderror" value="{{old('price')}}">
+            <label for="price" class="pt-5">*Prezzo:</label>
+            <input name="price" id="price" type="text" class="form-control input @error('price') is-invalid @enderror" value="{{old('price')}}" required>
             @error('price')
             <div class="invalid-feedback mb-3 mt-0">
                 {{$message}}
             </div>
             @enderror
 
-            <label class="pt-5" for="availability">Disponibilità:</label>
+            <label class="pt-5" for="availability">*Disponibilità:</label>
             <select name="availability" id="availability" class="form-select @error('availability') is-invalid @enderror"
-                aria-label="Default select example">
+                aria-label="Default select example" required>
                 <option value="" selected>Seleziona</option>
                 <option value="1" @if (old('availability') == '1') selected @endif>Disponibile</option>
                 <option value="0" @if (old('availability') == '0') selected @endif>Non Disponibile</option>
@@ -53,40 +64,12 @@
 
             <h6 class="pt-5">Intolleranze:</h6>
             <div class="d-flex flex-column gap-2 align-items-start">
+                @foreach ($intolerances as $item)
                 <div>
-                    
-                    <label for="Glutine">Glutine</label>
-                    <input type="checkbox" name="intolerance[]" id="Glutine" value="Glutine" >
+                    <label for="{{$item}}">{{$item}}</label>
+                    <input type="checkbox" name="intolerance[]" id="{{$item}}" value="{{$item}}" @checked(in_array($item, old('intolerance',[])))>
                 </div>
-                <div>
-                    
-                    <label for="Lattosio">Lattosio</label>
-                    <input type="checkbox" name="intolerance[]" id="Lattosio" value="Lattosio" >
-                </div>
-                <div>
-                    <label for="Uova">Uova</label>
-                    <input type="checkbox" name="intolerance[]" id="Uova" value="Uova" >
-                </div>
-                <div>
-                    <label for="Crostacei">Crostacei</label>
-                    <input type="checkbox" name="intolerance[]" id="Crostacei" value="Crostacei" >
-                </div>
-                <div>
-                    <label for="Frutta-secca">Frutta secca</label>
-                    <input type="checkbox" name="intolerance[]" id="Frutta-secca" value="Frutta-secca" >
-                </div>
-                <div>
-                    <label for="Soia">Soia</label>
-                    <input type="checkbox" name="intolerance[]" id="Soia" value="Soia" >
-                </div>
-                <div>
-                    <label for="Pesce">Pesce</label>
-                    <input type="checkbox" name="intolerance[]" id="Pesce" value="Pesce" >
-                </div>
-                <div>
-                    <label for="Nichel">Nichel</label>
-                    <input type="checkbox" name="intolerance[]" id="Nichel" value="Nichel" >
-                </div>
+                @endforeach
             </div>
 
             <label for="cover_image" class="pt-5">Immagine di copertina:</label>
