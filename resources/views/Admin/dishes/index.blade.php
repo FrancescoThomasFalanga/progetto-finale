@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('content')
-    <div class="container d-flex gap-4 py-4 ">
+    <div class="container d-flex justify-content-center gap-4 py-4 ">
 
         @foreach ($dishes as $dish)
             <div class="card" style="width: 18rem;">
@@ -63,7 +63,7 @@
 
 
     </div>
-    <div class="container">
+    <div class="container d-flex justify-content-center">
         <a class="btn btn-primary" href="{{ route('admin.dishes.create') }}">Aggiungi un piatto</a>
     </div>
 @endsection
