@@ -1,9 +1,9 @@
 @extends('layouts/app')
 
 @section('content')
-    <h1 class="m-4 text-center">Aggiungi un ristorante</h1>
+    <h1 class="m-4 text-center text-white">Aggiungi un ristorante</h1>
 
-    <form class="container" action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
+    <form class="container form-control border-5 border-warning rounded-5 py-4" action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">

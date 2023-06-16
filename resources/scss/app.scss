@@ -1,20 +1,32 @@
 @import '~bootstrap/scss/bootstrap';
 
-.jumbo {
-    img {
-
-        width: 100%;
-        height: 300px;
-        object-fit: contain;
-       
-    }
+body {
+    background-color: #0d6efd;
 }
 
+nav {
+    background-color: #ffc107;
+}
+
+.jumbo {
+    img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+}
 
 .icon-images {
     width: 30px;
     height: 30px;
-    
 }
 
+.logo_deliveboo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    img {
+        width: 70%;
+    }
+}

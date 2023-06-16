@@ -4,11 +4,11 @@
     <div class="container d-flex justify-content-center gap-4 py-4 ">
 
         @foreach ($dishes as $dish)
-            <div class="card" style="width: 18rem;">
+            <div class="card border-5 border-warning rounded-5" style="width: 18rem;">
                 @if ($dish->cover_image != 'https://static.vecteezy.com/ti/vettori-gratis/p1/5359703-cibo-icone-pixel-perfetto-illustrazione-vettoriale.jpg')
-                    <img src="{{ asset('storage/' . $dish->cover_image) }}" class="card-img-top" alt="...">
+                    <img class="rounded-0 rounded-top-5" src="{{ asset('storage/' . $dish->cover_image) }}" class="card-img-top" alt="...">
                 @else
-                    <img src="{{ $dish->cover_image }}" class="card-img-top" alt="...">
+                    <img class="rounded-0 rounded-top-5" src="{{ $dish->cover_image }}" class="card-img-top" alt="...">
                 @endif
                 <div class="card-body">
                     <h5 class="card-title">{{ $dish->name }}</h5>
@@ -64,6 +64,6 @@
 
     </div>
     <div class="container d-flex justify-content-center">
-        <a class="btn btn-primary" href="{{ route('admin.dishes.create') }}">Aggiungi un piatto</a>
+        <a class="btn btn-outline-warning" href="{{ route('admin.dishes.create') }}">Aggiungi un piatto</a>
     </div>
 @endsection

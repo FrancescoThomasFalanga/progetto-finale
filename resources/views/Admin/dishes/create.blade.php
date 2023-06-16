@@ -14,14 +14,12 @@ $intolerances = ['Glutine',
 @endphp
 
     <div class="go-back-btn text-center d-flex justify-content-center align-items-center gap-4" style="margin-top:100px">
-
-        <h2 class="mb-0 green text-uppercase">Crea Piatto</h2>
-
+        <h2 class="mb-4 green text-uppercase text-white">Crea Piatto</h2>
     </div>
 
-    <div class="container " style="padding-bottom: 100px">
+    <div class="container" style="padding-bottom: 100px">
 
-        <form class="form" action="{{route('admin.dishes.store', $dish->restaurant_id)}}" method="POST" enctype="multipart/form-data">
+        <form class="form-control border-5 border-warning rounded-5" action="{{route('admin.dishes.store', $dish->restaurant_id)}}" method="POST" enctype="multipart/form-data">
             @csrf
     
     
