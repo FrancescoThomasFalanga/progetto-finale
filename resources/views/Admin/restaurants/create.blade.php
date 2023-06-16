@@ -7,9 +7,9 @@
         @csrf
 
         <div class="mb-4">
-            <label for="activity_name">Nome dell'attività</label>
+            <label for="activity_name">*Nome dell'attività</label>
             <input type="text" name="activity_name" id="activity_name"
-                class="form-control @error('activity_name') is-invalid @enderror" value="{{ old('activity_name') }}" ddddd>
+                class="form-control @error('activity_name') is-invalid @enderror" value="{{ old('activity_name') }}" required>
             @error('activity_name')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -18,9 +18,9 @@
         </div>
 
         <div class="mb-4">
-            <label for="phone_number">Numero di telefono</label>
+            <label for="phone_number">*Numero di telefono</label>
             <input type="tel" name="phone_number" {{-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" --}} id="phone_number"
-                class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" ddddd>
+                class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required>
             @error('phone_number')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -29,9 +29,9 @@
         </div>
 
         <div class="mb-4">
-            <label for="address">Indirizzo</label>
+            <label for="address">*Indirizzo</label>
             <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror"
-                value="{{ old('address') }}" ddddd>
+                value="{{ old('address') }}" required>
             @error('address')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -40,9 +40,9 @@
         </div>
 
         <div class="mb-4">
-            <label for="vat">Partita IVA</label>
+            <label for="vat">*Partita IVA</label>
             <input type="number" name="vat" id="vat" class="form-control @error('vat') is-invalid @enderror"
-                value="{{ old('vat') }}" ddddd>
+                value="{{ old('vat') }}" required>
             @error('vat')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -51,7 +51,7 @@
         </div>
 
         <div class="mb-4 form-group">
-            <p>Tipologia del locale</p>
+            <p>*Tipologia del locale</p>
             @foreach ($types as $type)
                 <div class="form-check @error('types') is-invalid @enderror">
                     <input type="checkbox" class="form-check-input" name="types[]" id="type_{{ $type->id }}" value="{{ $type->id }}" @checked(in_array($type->id, old('types', [])))>
@@ -66,9 +66,9 @@
         </div>
 
         <div class="mb-4">
-            <label for="cover_image" class="">Copertina ristorante</label>
+            <label for="cover_image" class="">*Copertina ristorante</label>
             <input name="cover_image" id="cover_image" type="file"
-                class="form-control @error('cover_image') is-invalid @enderror">
+                class="form-control @error('cover_image') is-invalid @enderror" required>
             @error('cover_image')
                 <div class="invalid-feedback mb-4 mt-0"> {{ $message }} </div>
             @enderror
