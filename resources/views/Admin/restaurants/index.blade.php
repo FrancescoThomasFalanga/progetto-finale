@@ -3,8 +3,26 @@
 @section('content')
 
     <div class="container">
+        <h1 class="text-white m-4 text-center">
+            <div class="card-header text-center">Benvenuto {{ Auth::user()->name }}</div>
+        </h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card border-2 border-warning rounded-5">
+                    <div class="card-body text-center">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        {{ __("Hai effettuato l'accesso all'area amministrativa.") }}
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="jumbo border-5 border-warning">
-            <img class="rounded-0 rounded-top-5 pt-3" src="{{ asset('storage/' . $restaurants->cover_image) }}" alt="">
+            <img class="rounded-0 rounded-top-5 pt-3" src="{{ asset('storage/' . $restaurants->cover_image) }}"
+                alt="">
         </div>
         <div class="card text-center border-5 border-warning rounded-0">
             <div class="card-body">
