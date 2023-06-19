@@ -28,6 +28,7 @@ class RestaurantApiController extends Controller
 
         if($request->has('type_id') && $requestData['type_id']){
             $restaurant = Restaurant::with('dishes', 'types')
+            ->select('restaurants.*')
             ->join('restaurant_type', 'restaurants.id', '=', 'restaurant_type.restaurant_id')
             ->join('types', 'restaurant_type.type_id', '=', 'types.id')
             ->where('types.id', $requestData['type_id'] )
