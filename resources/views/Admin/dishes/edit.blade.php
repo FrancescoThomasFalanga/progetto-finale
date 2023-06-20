@@ -86,6 +86,15 @@ $intolerances = ['Glutine',
                 {{$message}}
             </div>
             @enderror
+
+            <hr>
+
+            <span class="my-5 text-center">Anteprima Immagine:</span>
+            @if ($dish->cover_image != 'https://static.vecteezy.com/ti/vettori-gratis/p1/5359703-cibo-icone-pixel-perfetto-illustrazione-vettoriale.jpg')
+                <img class="" src="{{ asset('storage/' . $dish->cover_image) }}" class="card-img-top" alt="..." style="width: 100%; height: 400px; object-fit:contain;">
+            @else
+                <img class="" src="{{ $dish->cover_image }}" class="card-img-top" alt="..." style="width: 100%; height: 400px; object-fit:contain;">
+            @endif
         
             <div class="buttons py-4 text-center">
 
