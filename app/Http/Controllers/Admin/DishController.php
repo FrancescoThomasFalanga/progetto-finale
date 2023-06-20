@@ -114,9 +114,9 @@ class DishController extends Controller
 
         $isTheSame = $dish->restaurant->user_id;
 
-        // dd($admin);
+        // dd($dish);
         
-        if($isTheSame != Auth::id()) {
+        if($isTheSame != $user) {
 
             return redirect()->route('admin.notFound');
 
