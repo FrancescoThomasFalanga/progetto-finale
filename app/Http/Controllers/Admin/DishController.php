@@ -110,9 +110,10 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $restaurantID = $restaurant->id;
+        $restaurantUser = $restaurant->user_id;
         $dishes = Dish::where('restaurant_id', $restaurantID)->first();
         
-        if($dishes == null || !$dishes) {
+        if($dishes == null || $user != $restaurant->user_id) {
 
             return redirect()->route('admin.notFound');
 
