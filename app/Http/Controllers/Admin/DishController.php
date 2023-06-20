@@ -23,7 +23,7 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $restaurantID = $restaurant->id;
-        $dishes = Dish::where('restaurant_id', $restaurantID)->orderBy('name', 'asc')->get();
+        $dishes = Dish::where('restaurant_id', $restaurantID)->orderBy('name','asc')->get();
 
         return view('admin.dishes.index', compact('dishes'));
     }
@@ -37,6 +37,7 @@ class DishController extends Controller
     {
 
         return view('admin.dishes.create', compact('dish'));
+
     }
 
     /**
@@ -65,6 +66,7 @@ class DishController extends Controller
         } else {
 
             $formData['cover_image'] = 'https://static.vecteezy.com/ti/vettori-gratis/p1/5359703-cibo-icone-pixel-perfetto-illustrazione-vettoriale.jpg';
+
         }
 
         $dish->fill($formData);
@@ -73,10 +75,10 @@ class DishController extends Controller
 
         $dish->restaurant_id = $restaurantID;
 
-        if (array_key_exists('intolerance', $formData)) {
+        if(array_key_exists('intolerance', $formData)){
             $intolerances = $formData['intolerance'];
-
-            $stringIntolerances = implode(", ", $intolerances);
+            
+            $stringIntolerances = implode(", ",$intolerances);
             $dish->intolerance = $stringIntolerances;
         }
 
@@ -109,14 +111,21 @@ class DishController extends Controller
         $restaurant = Restaurant::where('user_id', $user)->first();
         $restaurantID = $restaurant->id;
         $dishes = Dish::where('restaurant_id', $restaurantID)->first();
-        // dd($dish);
-        if ($dish != $dishes) {
+
+        $isTheSame = $dish->restaurant->user_id;
+
+        // dd($admin);
+        
+        if($isTheSame != Auth::id()) {
 
             return redirect()->route('admin.notFound');
+
         } else {
 
             return view('admin.dishes.edit', compact('dish'));
+
         }
+
     }
 
     /**
@@ -152,18 +161,20 @@ class DishController extends Controller
 
         $dish->update($formData);
 
-        if (array_key_exists('intolerance', $formData)) {
+        if(array_key_exists('intolerance', $formData)) {
 
-
+            
             $intolerances = $formData['intolerance'];
 
-
-            $stringIntolerances = implode(", ", $intolerances);
+            
+            $stringIntolerances = implode(", ",$intolerances);
             $dish->intolerance = $stringIntolerances;
-        } else {
+            
+        } else{
 
             $formData['intolerance'] = null;
-            $dish->intolerance = $formData['intolerance'];
+            $dish->intolerance =$formData['intolerance'];
+            
         }
 
         $dish->save();
@@ -180,42 +191,40 @@ class DishController extends Controller
     public function destroy(Dish $dish)
     {
 
-        if ($dish->cover_image) {
+        if($dish->cover_image){
             Storage::delete($dish->cover_image);
         }
-
+        
         $dish->delete();
 
         return redirect()->route('admin.dishes.index');
     }
 
-    private function validation($formData)
-    {
+    private function validation($formData) {
 
-        $validator = Validator::make(
-            $formData,
-            [
-                'name' => 'required|max:125|',
-                'description' => 'nullable',
-                'price' => 'required|decimal:2|min:0',
-                'availability' => 'required',
-                'intolerance' => 'nullable',
-                'cover_image' => 'image|max:4096',
-                'restaurant_id' => 'exists:restaurants,id'
-            ],
-            [
-                'name.required' => 'Questo campo non può essere lasciato vuoto',
-                'name.max' => 'Questo campo può avere massimo 125 caratteri',
-                'price.required' => 'Questo campo non può essere lasciato vuoto',
-                'price.decimal' => 'Specificare due cifre decimali',
-                'price.min' => 'Il numero deve essere positivo',
-                'availability.required' => 'Questo campo non può essere lasciato vuoto',
-                'restaurant_id.exists' => 'Questo campo non è ammesso',
-                'cover_image.image' => 'Il file deve essere una immagine',
-                'cover_image.max' =>  'Il file è troppo grande',
-            ]
-        )->validate();
+        $validator = Validator::make($formData,
+        [
+            'name'=> 'required|max:125|',
+            'description'=> 'nullable',
+            'price'=> 'required|decimal:2|min:0',
+            'availability'=> 'required',
+            'intolerance'=>'nullable',
+            'cover_image'=>'image|max:4096',
+            'restaurant_id' => 'exists:restaurants,id'
+        ],
+        [
+            'name.required'=> 'Questo campo non può essere lasciato vuoto',
+            'name.max'=> 'Questo campo può avere massimo 125 caratteri',
+            'price.required'=> 'Questo campo non può essere lasciato vuoto',
+            'price.decimal'=> 'Specificare due cifre decimali',
+            'price.min' => 'Il numero deve essere positivo',
+            'availability.required' => 'Questo campo non può essere lasciato vuoto',
+            'restaurant_id.exists'=>'Questo campo non è ammesso',
+            'cover_image.image' => 'Il file deve essere una immagine',
+            'cover_image.max' =>  'Il file è troppo grande',
+        ])->validate();
 
         return $validator;
+
     }
 }
