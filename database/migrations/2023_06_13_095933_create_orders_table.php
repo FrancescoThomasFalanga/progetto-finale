@@ -18,10 +18,10 @@ return new class extends Migration
             $table->decimal('total', 5, 2);
             $table->boolean('status');
             $table->string('number', 50);
-            $table->string('guest_first_name', 100);
-            $table->string('guest_last_name', 100);
-            $table->string('guest_address');
-            $table->string('guest_email', 150);
+            $table->string('first_name', 100);
+            $table->string('last_name', 100);
+            $table->string('address');
+            $table->string('email', 150);
             $table->timestamps();
         });
     }
