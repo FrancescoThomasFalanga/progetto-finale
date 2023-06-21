@@ -57,7 +57,8 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">*{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input onkeyup="checkPassword()" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <span id="message"></span>
                             </div>
                         </div>
 
@@ -74,4 +75,25 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+    let checkPassword = function() {
+
+        if(document.getElementById('password').value == document.getElementById('password-confirm').value ) {
+
+            document.getElementById('message').innerHTML='Le Password Corrispondono';
+            document.getElementById('message').style.color='green';
+
+        } else {
+
+            document.getElementById('message').innerHTML='Le Password Non Corrispondono';
+            document.getElementById('message').style.color='red';
+
+        }
+
+    }
+
+</script>
 @endsection
