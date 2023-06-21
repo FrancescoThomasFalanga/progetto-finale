@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="m-4 text-center text-white">Aggiungi un ristorante</h1>
 
-    <form class="container form-control border-5 border-warning rounded-5 py-4" action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
+    <form onsubmit="return validateForm()" class="container form-control border-5 border-warning rounded-5 py-4" action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="mb-4 form-group">
-            <p>*Tipologia del locale</p>
+            <p id="paragraph">*Tipologia del locale</p>
             @foreach ($types as $type)
                 <div class="form-check @error('types') is-invalid @enderror">
                     <input type="checkbox" class="form-check-input" name="types[]" id="type_{{ $type->id }}" value="{{ $type->id }}" @checked(in_array($type->id, old('types', [])))>
@@ -67,13 +67,18 @@
 
         <div class="mb-4">
             <label for="cover_image" class="">*Copertina ristorante</label>
-            <input name="cover_image" id="cover_image" type="file"
+            <input onchange="previewImage()" name="cover_image" id="cover_image" type="file"
                 class="form-control @error('cover_image') is-invalid @enderror" required>
             @error('cover_image')
                 <div class="invalid-feedback mb-4 mt-0"> {{ $message }} </div>
             @enderror
-        </div>
 
+            <hr>
+
+            <span class="my-5 text-center">Anteprima Immagine:</span>
+            <img id="preview">
+
+        </div>
 
         <button class="btn btn-primary" type="submit">Aggiungi</button>
     </form>

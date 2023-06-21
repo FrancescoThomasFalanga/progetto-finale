@@ -80,7 +80,7 @@ $intolerances = ['Glutine',
             </div>
 
             <label for="cover_image" class="pt-5">Immagine di copertina:</label>
-            <input name="cover_image" id="cover_image" type="file" class="form-control @error('cover_image') is-invalid @enderror">
+            <input onchange="previewImage()" name="cover_image" id="cover_image" type="file" class="form-control @error('cover_image') is-invalid @enderror">
             @error('cover_image')
             <div class="invalid-feedback mb-3 mt-0">
                 {{$message}}
@@ -90,11 +90,7 @@ $intolerances = ['Glutine',
             <hr>
 
             <span class="my-5 text-center">Anteprima Immagine:</span>
-            @if ($dish->cover_image != 'https://static.vecteezy.com/ti/vettori-gratis/p1/5359703-cibo-icone-pixel-perfetto-illustrazione-vettoriale.jpg')
-                <img class="" src="{{ asset('storage/' . $dish->cover_image) }}" class="card-img-top" alt="..." style="width: 100%; height: 400px; object-fit:contain;">
-            @else
-                <img class="" src="{{ $dish->cover_image }}" class="card-img-top" alt="..." style="width: 100%; height: 400px; object-fit:contain;">
-            @endif
+            <img id="preview">
         
             <div class="buttons py-4 text-center">
 

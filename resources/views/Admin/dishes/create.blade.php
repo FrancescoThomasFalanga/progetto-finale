@@ -71,12 +71,17 @@ $intolerances = ['Glutine',
             </div>
 
             <label for="cover_image" class="pt-5">Immagine di copertina:</label>
-            <input name="cover_image" id="cover_image" type="file" class="form-control @error('cover_image') is-invalid @enderror">
+            <input onchange="previewImage()" name="cover_image" id="cover_image" type="file" class="form-control mb-4 @error('cover_image') is-invalid @enderror">
             @error('cover_image')
             <div class="invalid-feedback mb-3 mt-0">
                 {{$message}}
             </div>
             @enderror
+
+            <hr>
+
+            <span>Anteprima Immagine:</span>
+            <img id="preview">
         
             <div class="buttons py-4 text-center">
 
@@ -89,5 +94,4 @@ $intolerances = ['Glutine',
 
     </div>
     
-
 @endsection
