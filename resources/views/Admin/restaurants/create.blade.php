@@ -19,8 +19,9 @@
 
         <div class="mb-4">
             <label for="phone_number">*Numero di telefono</label>
-            <input type="tel" name="phone_number" {{-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" --}} id="phone_number"
+            <input type="tel" name="phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="phone_number"
                 class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required>
+            <small>Formato: 123-456-7890</small>
             @error('phone_number')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -41,7 +42,7 @@
 
         <div class="mb-4">
             <label for="vat">*Partita IVA</label>
-            <input type="number" name="vat" id="vat" class="form-control @error('vat') is-invalid @enderror"
+            <input minlength="11" maxlength="15" type="text" name="vat" id="vat" class="form-control @error('vat') is-invalid @enderror"
                 value="{{ old('vat') }}" required>
             @error('vat')
                 <div class="invalid-feedback">
