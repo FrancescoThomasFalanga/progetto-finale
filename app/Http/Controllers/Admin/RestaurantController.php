@@ -18,12 +18,24 @@ class RestaurantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Restaurant $restaurant)
     {
+
         $user_id = Auth::id();
         $restaurants = Restaurant::where('user_id', $user_id)->first();
 
-        return view('admin.restaurants.index', compact('restaurants'));
+        if($restaurants == null) {
+
+            $types = Type::all();
+
+            return view('admin.restaurants.create', compact('types'));
+
+        } else {
+    
+            return view('admin.restaurants.index', compact('restaurants'));
+
+        }
+
     }
 
     /**
