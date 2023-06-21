@@ -28,4 +28,59 @@
     </div>
 </body>
 
+<script>
+
+    function previewImage() {
+
+        let file = document.getElementById('cover_image').files;
+
+        if (file.length > 0) {
+
+            let fileReader = new FileReader();
+
+            fileReader.onload = function (event) {
+
+                document.getElementById('preview').setAttribute('src', event.target.result);
+
+            };
+
+            fileReader.readAsDataURL(file[0]);
+            
+        }
+
+    };
+
+    function validateForm() {
+      let checkboxes = document.getElementsByName('types[]');
+      let isChecked = false;
+  
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          isChecked = true;
+          break;
+        }
+      }
+  
+      if (!isChecked) {
+
+        let paragraphEl = document.getElementById('paragraph');
+
+        let newParagraph = document.createElement('p');
+
+        newParagraph.textContent = 'Seleziona almeno una tipologia!';
+
+        newParagraph.classList.add('text-danger', 'fw-bold');
+
+        paragraphEl.appendChild(newParagraph);
+        
+
+        // alert('Seleziona almeno una opzione');
+        return false;
+      }
+  
+      return true;
+    };
+
+</script>
+
 </html>
