@@ -32,6 +32,7 @@ class RestaurantApiController extends Controller
             ->join('restaurant_type', 'restaurants.id', '=', 'restaurant_type.restaurant_id')
             ->join('types', 'restaurant_type.type_id', '=', 'types.id')
             ->whereIn('types.id', $requestData['type_id'] )
+            ->distinct()
             ->paginate(6);
 
             if(count($restaurant) == 0) {
