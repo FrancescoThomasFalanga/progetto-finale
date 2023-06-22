@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['total', 'status', 'number', 'guest_first_name', 'guest_last_name', 'guest_address', 'guest_email'];
+    protected $fillable = ['total', 'status', 'number', 'first_name', 'last_name', 'address', 'email'];
 
     public function dishes()
     {
