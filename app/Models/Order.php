@@ -9,9 +9,12 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function dishes() {
+    protected $fillable = ['total', 'status', 'number', 'guest_first_name', 'guest_last_name', 'guest_address', 'guest_email'];
 
-        return $this->belongsToMany(Dish::class);
+    public function dishes()
+    {
 
+        return $this->belongsToMany(Dish::class)
+            ->withPivot('dish_id', 'order_id');
     }
 }
