@@ -64,15 +64,20 @@
       if (!isChecked) {
 
         let paragraphEl = document.getElementById('paragraph');
-
-        let newParagraph = document.createElement('p');
-
-        newParagraph.textContent = 'Seleziona almeno una tipologia!';
-
-        newParagraph.classList.add('text-danger', 'fw-bold');
-
-        paragraphEl.appendChild(newParagraph);
         
+
+        if (!paragraphEl.querySelector('.text-danger')) {
+
+            let newParagraph = document.createElement('p');
+
+            newParagraph.textContent = 'Seleziona almeno una tipologia!';
+
+            newParagraph.classList.add('text-danger', 'fw-bold');
+            
+            paragraphEl.appendChild(newParagraph);
+
+        }
+
 
         // alert('Seleziona almeno una opzione');
         return false;
