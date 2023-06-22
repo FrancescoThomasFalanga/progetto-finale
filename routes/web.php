@@ -41,7 +41,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::resource('orders', OrderController::class);
 
-    Route::get('/404', [HomeController::class, 'notFound'])->name('notFound');
+    Route::get('/401', [HomeController::class, 'notFound'])->name('notFound');
     
 });
 

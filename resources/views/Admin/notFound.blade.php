@@ -35,8 +35,8 @@
                 </div>
             </div>
 
-            <p class="p404" data-depth="0.50">404</p>
-            <p class="p404" data-depth="0.10">404</p>
+            <p class="p404" data-depth="0.50">401</p>
+            <p class="p404" data-depth="0.10">401</p>
 
         </div>
 
