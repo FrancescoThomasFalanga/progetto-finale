@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\RestaurantController;
+use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\GuestHomeController;
 use App\Http\Controllers\ProfileController;
@@ -40,6 +41,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('types', TypeController::class);
 
     Route::resource('orders', OrderController::class);
+
+    Route::get('stats', [StatController::class, 'index'])->name('stats');
 
     Route::get('/401', [HomeController::class, 'notFound'])->name('notFound');
     
