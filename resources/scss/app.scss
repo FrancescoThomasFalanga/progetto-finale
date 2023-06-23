@@ -462,3 +462,9 @@ inset 5px 5px 20px rgba($bg-03, 0.25),
 
     }
 }
+
+#table-container{
+    .table{
+        --bs-table-bg: trasparent;
+    }
+}
