@@ -34,7 +34,7 @@ class LeadController extends Controller
         $new_lead->fill($data);
         $new_lead->save();
 
-        Mail::to('99angelo.dire@gmail.com')->send(new NewContact($new_lead));
+        Mail::to('francescoasdf3124@gmail.com')->send(new NewContact($new_lead));
 
         return response()->json([
             'success' => true,
