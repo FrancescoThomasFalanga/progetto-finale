@@ -206,7 +206,7 @@ class DishController extends Controller
         [
             'name'=> 'required|max:125|',
             'description'=> 'nullable',
-            'price'=> 'required|decimal:2|min:0',
+            'price'=> 'required|decimal:2|min:0|max:999.99',
             'availability'=> 'required',
             'intolerance'=>'nullable',
             'cover_image'=>'image|max:4096',
@@ -218,6 +218,7 @@ class DishController extends Controller
             'price.required'=> 'Questo campo non può essere lasciato vuoto',
             'price.decimal'=> 'Specificare due cifre decimali',
             'price.min' => 'Il numero deve essere positivo',
+            'price.max' => 'Il prezzo massimo può essere 999.99',
             'availability.required' => 'Questo campo non può essere lasciato vuoto',
             'restaurant_id.exists'=>'Questo campo non è ammesso',
             'cover_image.image' => 'Il file deve essere una immagine',

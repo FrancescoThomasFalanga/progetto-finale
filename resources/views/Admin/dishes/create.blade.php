@@ -40,7 +40,7 @@ $intolerances = ['Glutine',
             @enderror
         
             <label for="price" class="pt-5">*Prezzo:</label>
-            <input min="0" step=".01" name="price" id="price" type="number" class="form-control input @error('price') is-invalid @enderror" value="{{old('price')}}" required>
+            <input min="0" max="999.99" step=".01" name="price" id="price" type="number" class="form-control input @error('price') is-invalid @enderror" value="{{old('price')}}" required>
             @error('price')
             <div class="invalid-feedback mb-3 mt-0">
                 {{$message}}
