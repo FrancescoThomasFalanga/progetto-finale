@@ -37,6 +37,8 @@
 <script>
   const orderCounts = @json($orderCounts);
   const months = @json($months);
+
+  orderCounts.push(0);
   
   const labels = months.map(month => {
       const monthString = month.toString().padStart(2, '0');
