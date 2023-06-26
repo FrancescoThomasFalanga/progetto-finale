@@ -2,28 +2,37 @@
 
 @section('content')
 
-<canvas id="myChart" class="bg-white m-5 container"></canvas>
 
+<div class="container-fluid d-flex align-items-center justify-content-center">
 
-<h1 class="text-center"> Guadagno totale: 
-
-  @php
-
-    $totalArray = [];
+    <canvas id="myChart" class="bg-white m-5" style="max-width:800px"></canvas>
     
-    foreach ($total as $singleTotal) {
-      
-      $totalArray[] = $singleTotal['total'];
-      
-    };
+    <div class="card" style="width: 300px;">
+        <div class="card-body">
+            <h1 class="text-center"> Guadagno totale: 
+    
+                @php
+              
+                  $totalArray = [];
+                  
+                  foreach ($total as $singleTotal) {
+                    
+                    $totalArray[] = $singleTotal['total'];
+                    
+                  };
+              
+                  $all = array_sum($totalArray);
+              
+                  echo $all . '€';
+              
+                @endphp
+              
+              </h1>
+        </div>
+      </div>
 
-    $all = array_sum($totalArray);
+</div>
 
-    echo $all . '€';
-
-  @endphp
-
-</h1>
 
 <script>
   const orderCounts = @json($orderCounts);
@@ -79,7 +88,8 @@
               y: {
                   beginAtZero: true
               }
-          }
+          },
+          
       }
   };
 
