@@ -8,6 +8,7 @@ use App\Models\Restaurant;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StatController extends Controller
 {
@@ -27,17 +28,26 @@ class StatController extends Controller
             $restaurantID = $restaurants->id;
             
             $orders = Order::with('dishes')
-            ->select('orders.*')
+            ->selectRaw('COUNT(DISTINCT orders.id) AS order_count, MONTH(orders.created_at) AS month')
             ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
             ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
-            ->where('dishes.restaurant_id', $restaurantID )
-            ->distinct()
-            ->get();
-        
-        
-            return view('admin/stats/index', compact('orders'));
+            ->where('dishes.restaurant_id', $restaurantID)
+            ->groupBy('month')
+            ->orderBy('month');
 
-        }
+            $total = Order::select('orders.*')
+            ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
+            ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
+            ->where('dishes.restaurant_id', $restaurantID)
+            ->distinct('dish_order.order_id')
+            ->get();
+    
+            $orderCounts = $orders->pluck('order_count')->toArray();
+            $months = $orders->pluck('month')->toArray();
+        
+            return view('admin/stats/index', compact('orderCounts', 'months', 'total'));
+
+        };
 
 
 
