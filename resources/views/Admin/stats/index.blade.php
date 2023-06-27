@@ -4,7 +4,7 @@
 
 
 <div class="container-fluid d-flex align-items-center justify-content-center">
-
+    
     <canvas id="myChart" class="bg-white m-5" style="max-width:800px"></canvas>
     
     <div class="card" style="width: 300px;">
@@ -41,29 +41,39 @@
     @endphp
 
     let ordersData = JSON.parse(ciao)
+    var dataCorrente = new Date();
 
+    var mesi = []; 
 
-    var months = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
-    var totals = [];
+    var dataCorrente = new Date();
 
-    months.forEach(function(month) {
-        var found = false;
-        ordersData.forEach(function(order) {
-            if (order.date === month + ' 2023') {
-                totals.push(order.total);
-                found = true;
+    for (var i = 0; i < 12; i++) {
+    var mese = dataCorrente.toLocaleString('en-US', { month: 'short', locale: 'en-US' });
+    var anno = dataCorrente.getFullYear();
+    var meseAnno = mese + " " + anno;
+
+    mesi.unshift(meseAnno); 
+
+    dataCorrente.setMonth(dataCorrente.getMonth() - 1);
+    }
+    newMesi = mesi.reverse()
+        var totals = [];
+        newMesi.forEach(function(month) {
+            var found = false;
+            ordersData.forEach(function(order) {
+                
+                if (order.date === month ) {
+                    totals.push(order.total);
+                    found = true;
+                }
+            });
+            if (!found) {
+                totals.push(0);
             }
         });
-        if (!found) {
-            totals.push(0);
-        }
-    });
 
     const data = {
-      labels: months,
+      labels: newMesi,
       datasets: [{
           label: 'Vendite mensili',
           data: totals,
