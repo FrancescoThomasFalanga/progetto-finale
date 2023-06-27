@@ -26,14 +26,6 @@ class StatController extends Controller
         } else {
 
             $restaurantID = $restaurants->id;
-            
-            $orders = Order::with('dishes')
-            ->selectRaw('COUNT(DISTINCT orders.id) AS order_count, MONTH(orders.created_at) AS month')
-            ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
-            ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
-            ->where('dishes.restaurant_id', $restaurantID)
-            ->groupBy('month')
-            ->orderBy('month');
 
             $total = Order::select('orders.*')
             ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
@@ -42,10 +34,24 @@ class StatController extends Controller
             ->distinct('dish_order.order_id')
             ->get();
     
-            $orderCounts = $orders->pluck('order_count')->toArray();
-            $months = $orders->pluck('month')->toArray();
-        
-            return view('admin/stats/index', compact('orderCounts', 'months', 'total'));
+            $orders = Order::selectRaw('COUNT(DISTINCT dish_order.order_id) as total, DATE_FORMAT(orders.created_at, "%b %Y") as date')
+            ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
+            ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
+            ->where('dishes.restaurant_id', $restaurantID)
+            ->groupBy('date')
+            ->get();
+
+            $orderCounts = [];
+            foreach ($orders as $order) {
+                $orderCounts[] = [
+                    'total' => $order->total,
+                    'date' => $order->date,
+                ];
+            }
+            
+            // dd($orderCounts);
+
+            return view('admin/stats/index', compact( 'orderCounts', 'total'));
 
         };
 
