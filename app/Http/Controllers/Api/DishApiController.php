@@ -21,13 +21,4 @@ class DishApiController extends Controller
             'results' => $dishes,
         ]);
     }
-    // public function show($slug)
-    // {
-    //     $dish = Dish::where('slug', $slug)->with('restaurant', 'orders')->first();
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'results' => $dish
-    //     ]);
-    // }
 }

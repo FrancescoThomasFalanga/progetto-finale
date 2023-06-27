@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dish;
 use App\Models\Order;
 use App\Models\Restaurant;
 use App\Models\Type;
@@ -17,32 +18,29 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $user_id = Auth::id();
         $restaurants = Restaurant::where('user_id', $user_id)->first();
 
-        if($restaurants == null) {
+        if ($restaurants == null) {
 
             $types = Type::all();
 
             return view('admin.restaurants.create', compact('types'));
-            
         } else {
-            
+
             $restaurantID = $restaurants->id;
-            
+
             $orders = Order::with('dishes')
-            ->select('orders.*')
-            ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
-            ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
-            ->where('dishes.restaurant_id', $restaurantID )
-            ->distinct()
-            ->get();
-    
+                ->select('orders.*')
+                ->join('dish_order', 'orders.id', '=', 'dish_order.order_id')
+                ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
+                ->where('dishes.restaurant_id', $restaurantID)
+                ->distinct()
+                ->get();
+
             return view('admin/orders/index', compact('orders'));
-
         }
-
     }
 
     /**
@@ -74,7 +72,14 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $dishes = Dish::with('orders')
+            ->select('dishes.*')
+            ->join('dish_order', 'dishes.id', '=', 'dish_order.dish_id')
+            ->where('dish_order.order_id', '=', $order->id)
+            ->get();
+
+
+        return view('admin.orders.show', compact('dishes', 'order'));
     }
 
     /**

@@ -30,23 +30,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function() {
-    
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+
     Route::get('/', [HomeController::class, 'home'])->name('home');
-    
+
     Route::resource('restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:slug']);
 
     Route::resource('dishes', DishController::class)->parameters(['dishes' => 'dish:slug']);
 
     Route::resource('types', TypeController::class);
 
-    Route::resource('orders', OrderController::class);
+    Route::resource('orders', OrderController::class)->parameters(['orders' => 'order:id']);
 
     Route::get('stats', [StatController::class, 'index'])->name('stats');
 
     Route::get('/401', [HomeController::class, 'notFound'])->name('notFound');
-    
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
