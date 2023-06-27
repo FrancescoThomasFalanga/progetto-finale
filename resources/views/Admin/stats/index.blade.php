@@ -35,21 +35,38 @@
 
 
 <script>
-  const orderCounts = @json($orderCounts);
-  const months = @json($months);
 
-  orderCounts.push(0);
-  
-  const labels = months.map(month => {
-      const monthString = month.toString().padStart(2, '0');
-      return `${monthString}/23`;
-  });
+    @php
+        echo "var ciao = '" . json_encode($orderCounts) . "';";
+    @endphp
 
-  const data = {
-      labels: labels,
+    let ordersData = JSON.parse(ciao)
+
+
+    var months = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    var totals = [];
+
+    months.forEach(function(month) {
+        var found = false;
+        ordersData.forEach(function(order) {
+            if (order.date === month + ' 2023') {
+                totals.push(order.total);
+                found = true;
+            }
+        });
+        if (!found) {
+            totals.push(0);
+        }
+    });
+
+    const data = {
+      labels: months,
       datasets: [{
           label: 'Vendite mensili',
-          data: orderCounts,
+          data: totals,
           backgroundColor: [
               'rgba(255, 26, 104, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -58,11 +75,11 @@
               'rgba(153, 102, 255, 0.2)',
               'rgba(255, 159, 64, 0.2)',
               'rgba(0, 0, 0, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(0, 0, 0, 0.2)',
+              'rgba(25, 206, 86, 0.2)',
+              'rgba(175, 192, 192, 0.2)',
+              'rgba(53, 102, 255, 0.2)',
+              'rgba(230, 129, 64, 0.2)',
+              'rgba(0, 0, 100, 0.2)',
           ],
           borderColor: [
               'rgba(255, 26, 104, 1)',
@@ -72,11 +89,11 @@
               'rgba(153, 102, 255, 1)',
               'rgba(255, 159, 64, 1)',
               'rgba(0, 0, 0, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(0, 0, 0, 1)'
+              'rgba(25, 206, 86, 1)',
+              'rgba(175, 192, 192, 1)',
+              'rgba(53, 102, 255, 1)',
+              'rgba(230, 129, 64, 1)',
+              'rgba(0, 0, 100, 1)'
           ],
           borderWidth: 1
       }]
