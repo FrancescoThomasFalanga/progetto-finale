@@ -56,9 +56,9 @@
 
     dataCorrente.setMonth(dataCorrente.getMonth() - 1);
     }
-    newMesi = mesi.reverse()
+    
         var totals = [];
-        newMesi.forEach(function(month) {
+        mesi.forEach(function(month) {
             var found = false;
             ordersData.forEach(function(order) {
                 
@@ -73,7 +73,7 @@
         });
 
     const data = {
-      labels: newMesi,
+      labels: mesi,
       datasets: [{
           label: 'Vendite mensili',
           data: totals,

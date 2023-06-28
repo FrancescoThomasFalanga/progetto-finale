@@ -19,8 +19,7 @@
             <th scope="col">Mail</th>
             <th scope="col">Totale</th>
             <th scope="col">Data</th>
-            <th scope="col">Ordini</th>
-    
+     
           </tr>
         </thead>
         <tbody>
@@ -34,7 +33,6 @@
             <td>{{$order->email}}</td>
             <td>{{$order->total}}</td>
             <td>{{$order->created_at}}</td>
-            <td><a class="btn btn-warning" href="{{route('admin.orders.show', $order->id)}}">Visualizza</a> </td>
                       
         </tr>
         @endforeach

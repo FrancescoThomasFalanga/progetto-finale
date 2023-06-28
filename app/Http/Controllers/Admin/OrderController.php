@@ -72,16 +72,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $dishes = Dish::with('orders')
-            ->select('dishes.*')
-            ->join('dish_order', 'dishes.id', '=', 'dish_order.dish_id')
-            ->where('dish_order.order_id', '=', $order->id)
-            ->get();
-
-
-        return view('admin.orders.show', compact('dishes', 'order'));
+        
     }
-
     /**
      * Show the form for editing the specified resource.
      *
