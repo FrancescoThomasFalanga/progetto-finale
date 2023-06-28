@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('content')
-    <div class="container d-flex justify-content-center gap-4 py-4 ">
+    <div class="container d-flex justify-content-center gap-4 py-4 flex-wrap">
 
         @foreach ($dishes as $dish)
             <div class="card border-5 rounded-5" style="width: 18rem;">
