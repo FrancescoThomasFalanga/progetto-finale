@@ -3,14 +3,16 @@
 @section('content')
 
 
-<div class="container-fluid d-flex align-items-center justify-content-center">
+<div class="container-fluid d-flex flex-column  align-items-center justify-content-center">
     
-    <canvas id="myChart" class="bg-white m-5" style="max-width:800px"></canvas>
+    <canvas id="myChart" class=" m-5" style="max-width: 800px; display: block; height: 400px; width: 800px;background-color: #1d21245c;border-radius: 30px;"></canvas>
     
-    <div class="card" style="width: 300px;">
-        <div class="card-body">
-            <h1 class="text-center"> Guadagno totale: 
     
+    <div class="card" style="width: 400px; border-radius: 11px;">
+        <div class="card-body" style="display: flex;flex-direction: column; background-color: #212529;color: #ffcc6a;border-radius: 9px;">
+            <h1 class="text-center"> Guadagno totale</h1>
+            <b class="text-center" style="font-size: 30px;">
+
                 @php
               
                   $totalArray = [];
@@ -26,8 +28,8 @@
                   echo $all . '€';
               
                 @endphp
+            </b>
               
-              </h1>
         </div>
       </div>
 
@@ -78,18 +80,18 @@
           label: 'Vendite mensili',
           data: totals,
           backgroundColor: [
-              'rgba(255, 26, 104, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(0, 0, 0, 0.2)',
-              'rgba(25, 206, 86, 0.2)',
-              'rgba(175, 192, 192, 0.2)',
-              'rgba(53, 102, 255, 0.2)',
-              'rgba(230, 129, 64, 0.2)',
-              'rgba(0, 0, 100, 0.2)',
+              'rgba(255, 26, 104, 0.5)',
+              'rgba(54, 162, 235, 0.5)',
+              'rgba(255, 206, 86, 0.5)',
+              'rgba(75, 192, 192, 0.5)',
+              'rgba(153, 102, 255, 0.5)',
+              'rgba(255, 159, 64, 0.5)',
+              'rgba(255, 0, 0, 0.5) ',
+              'rgba(25, 206, 86, 0.5)',
+              'rgba(175, 192, 192, 0.5)',
+              'rgba(53, 102, 255, 0.5)',
+              'rgba(230, 129, 64, 0.5)',
+              'rgba(0, 0, 100, 0.5)',
           ],
           borderColor: [
               'rgba(255, 26, 104, 1)',
@@ -98,7 +100,7 @@
               'rgba(75, 192, 192, 1)',
               'rgba(153, 102, 255, 1)',
               'rgba(255, 159, 64, 1)',
-              'rgba(0, 0, 0, 1)',
+              'rgba(255, 0, 0, 1) ',
               'rgba(25, 206, 86, 1)',
               'rgba(175, 192, 192, 1)',
               'rgba(53, 102, 255, 1)',

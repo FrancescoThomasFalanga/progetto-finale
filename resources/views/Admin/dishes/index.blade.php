@@ -4,7 +4,7 @@
     <div class="container d-flex justify-content-center gap-4 py-4 ">
 
         @foreach ($dishes as $dish)
-            <div class="card border-5 border-warning rounded-5" style="width: 18rem;">
+            <div class="card border-5 rounded-5" style="width: 18rem;">
                 @if ($dish->cover_image != 'https://static.vecteezy.com/ti/vettori-gratis/p1/5359703-cibo-icone-pixel-perfetto-illustrazione-vettoriale.jpg')
                     <img class="rounded-0 rounded-top-5" src="{{ asset('storage/' . $dish->cover_image) }}" class="card-img-top" alt="...">
                 @else
@@ -50,7 +50,7 @@
                                 @csrf
                                 @method('DELETE')
     
-                                <button type="submit" class="btn btn-secondary">ELIMINA<span></span></button>
+                                <button type="submit" class="btn btn-danger">ELIMINA<span></span></button>
                             </form>
                         </div>
                     </div>

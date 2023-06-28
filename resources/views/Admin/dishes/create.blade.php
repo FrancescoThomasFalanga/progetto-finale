@@ -19,7 +19,7 @@ $intolerances = ['Glutine',
 
     <div class="container" style="padding-bottom: 100px">
 
-        <form class="form-control border-5 border-warning rounded-5" action="{{route('admin.dishes.store', $dish->restaurant_id)}}" method="POST" enctype="multipart/form-data">
+        <form class="form-control border-5 rounded-5" action="{{route('admin.dishes.store', $dish->restaurant_id)}}" method="POST" enctype="multipart/form-data">
             @csrf
     
     

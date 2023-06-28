@@ -1,11 +1,39 @@
 @import '~bootstrap/scss/bootstrap';
 
 body {
-    background-color: #0d6efd;
+    background-color: #212529;
 }
 
 nav {
-    background-color: #ffc107;
+    background-color: #ffcc6a;
+}
+
+.card{
+    --bs-card-border-color: #ffcc6a;
+}
+
+.btn-outline-warning{
+    --bs-btn-color: #ffcc6a;
+    --bs-btn-border-color: #ffcc6a;
+    --bs-btn-hover-bg: #ffcc6a;
+}
+
+.form-control {
+    
+    border: var(--bs-border-width) solid #ffcc6a;
+  
+  }
+
+hr {
+
+color: #212529;
+
+border-top: 2px solid;
+opacity: 0.5;
+}
+
+.nav_logo img{
+    width: 60px;
 }
 
 .jumbo {

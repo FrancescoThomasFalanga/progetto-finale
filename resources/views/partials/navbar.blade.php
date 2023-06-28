@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md shadow-sm">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <div class="logo_deliveboo">
-                <strong>Deliveboo</strong>
+            <div class="nav_logo">
+                <img src="http://localhost:5174/images/logo-deliveboo.png" class="nav-img" alt="">
             </div>
             {{-- config('app.name', 'Laravel') --}}
         </a>

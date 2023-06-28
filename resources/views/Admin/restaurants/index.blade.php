@@ -24,7 +24,7 @@
             <img class="rounded-0 rounded-top-5 pt-3" src="{{ asset('storage/' . $restaurants->cover_image) }}"
                 alt="">
         </div>
-        <div class="card text-center border-5 border-warning rounded-0">
+        <div class="card text-center border-5 rounded-0">
             <div class="card-body">
                 <h2 class="card-title ">{{ $restaurants->activity_name }}</h2>
                 <p class="card-text d-flex gap-2 justify-content-center">
