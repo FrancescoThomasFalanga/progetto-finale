@@ -10,9 +10,17 @@
                 @else
                     <img class="card-img-top rounded-0 rounded-top-5" src="{{ $dish->cover_image }}" alt="...">
                 @endif
-                <div class="card-body">
+                <div class="card-body bg-dark text-white">
                     <h5 class="card-title label-bg text-white">{{ $dish->name }}</h5>
-                    <p class="card-text">{{ $dish->description }}</p>
+                    <p class="card-text">
+
+                        @php
+                            
+                            echo mb_strimwidth($dish->description, 0, 60, "...");
+                            
+                        @endphp
+
+                    </p>
                 </div>
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-white">Prezzo: {{ $dish->price }}€</li>
