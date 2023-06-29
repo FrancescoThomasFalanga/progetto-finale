@@ -3,14 +3,15 @@
 @section('content')
 
 
-<div class="container-fluid d-flex flex-column  align-items-center justify-content-center">
-    
-    <canvas id="myChart" class=" m-5" style="max-width: 800px; display: block; height: 400px; width: 800px;background-color: #1d21245c;border-radius: 30px;"></canvas>
-    
-    
-    <div class="card" style="width: 400px; border-radius: 11px;">
-        <div class="card-body" style="display: flex;flex-direction: column; background-color: #212529;color: #ffcc6a;border-radius: 9px;">
-            <h1 class="text-center"> Guadagno totale</h1>
+<div class="container-fluid d-flex flex-column align-items-center justify-content-center">
+
+    <div class="canvas-container m-5" style="max-width: 100%; width: 800px;">
+        <canvas id="myChart" style="display: block; height: 400px; width: 100%; max-width: 800px; background-color: #ffcc6a; border-radius: 30px;"></canvas>
+    </div>
+
+    <div class="card" style="max-width: 400px; border-radius: 11px;">
+        <div class="card-body text-center" style="background-color: #212529; color: #ffcc6a; border-radius: 9px;">
+            <h1 class="text-center">Guadagno totale</h1>
             <b class="text-center" style="font-size: 30px;">
 
                 @php
