@@ -19,11 +19,11 @@ $intolerances = ['Glutine',
 
     <div class="container" style="padding-bottom: 100px">
 
-        <form class="form-control border-5 rounded-5" action="{{route('admin.dishes.store', $dish->restaurant_id)}}" method="POST" enctype="multipart/form-data">
+        <form class="background form-control border-5 rounded-5" action="{{route('admin.dishes.store', $dish->restaurant_id)}}" method="POST" enctype="multipart/form-data">
             @csrf
     
     
-            <label class="pt-5" for="name">*Nome:</label>
+            <label class="mt-5 mb-2 label-bg text-white" for="name">*Nome:</label>
             <input name="name" id="name" type="text" class="form-control input @error('name') is-invalid @enderror" value="{{old('name')}}" required>
             @error('name')
             <div class="invalid-feedback mb-3 mt-0">
@@ -31,7 +31,7 @@ $intolerances = ['Glutine',
             </div>
             @enderror
 
-            <label class="pt-5" for="description">Descrizione:</label>
+            <label class="mt-5 mb-2 label-bg text-white" for="description">Descrizione:</label>
             <input name="description" id="description" type="text" class="form-control input @error('description') is-invalid @enderror" value="{{old('description')}}">
             @error('description')
             <div class="invalid-feedback mb-3 mt-0">
@@ -39,7 +39,7 @@ $intolerances = ['Glutine',
             </div>
             @enderror
         
-            <label for="price" class="pt-5">*Prezzo:</label>
+            <label for="price" class="mt-5 mb-2 label-bg text-white">*Prezzo:</label>
             <input min="0" max="999.99" step=".01" name="price" id="price" type="number" class="form-control input @error('price') is-invalid @enderror" value="{{old('price')}}" required>
             @error('price')
             <div class="invalid-feedback mb-3 mt-0">
@@ -47,7 +47,7 @@ $intolerances = ['Glutine',
             </div>
             @enderror
 
-            <label class="pt-5" for="availability">*Disponibilità:</label>
+            <label class="mt-5 mb-2 label-bg text-white" for="availability">*Disponibilità:</label>
             <select name="availability" id="availability" class="form-select @error('availability') is-invalid @enderror"
                 aria-label="Default select example" required>
                 <option value="" selected>Seleziona</option>
@@ -60,8 +60,8 @@ $intolerances = ['Glutine',
                 </div>
             @enderror
 
-            <h6 class="pt-5">Intolleranze:</h6>
-            <div class="d-flex flex-column gap-2 align-items-start">
+            <h6 class="mt-5 mb-2 label-bg text-white">Intolleranze:</h6>
+            <div class="d-flex flex-column gap-2 align-items-start label-bg text-white" style="width: fit-content">
                 @foreach ($intolerances as $item)
                 <div>
                     <label for="{{$item}}">{{$item}}</label>
@@ -70,7 +70,7 @@ $intolerances = ['Glutine',
                 @endforeach
             </div>
 
-            <label for="cover_image" class="pt-5">Immagine di copertina:</label>
+            <label for="cover_image" class="mt-5 mb-2 label-bg text-white">Immagine di copertina:</label>
             <input onchange="previewImage()" name="cover_image" id="cover_image" type="file" class="form-control mb-4 @error('cover_image') is-invalid @enderror">
             @error('cover_image')
             <div class="invalid-feedback mb-3 mt-0">
@@ -80,13 +80,13 @@ $intolerances = ['Glutine',
 
             <hr>
 
-            <span>Anteprima Immagine:</span>
+            <span class="mt-2 mb-3 text-center label-bg text-white">Anteprima Immagine:</span>
             <img id="preview">
         
             <div class="buttons py-4 text-center">
 
-                <button id="send" type="submit" class="btn btn-primary">Invia</button>
-                <a class="btn btn-secondary" href="{{route('admin.dishes.index')}}">Torna indietro</a>
+                <button id="send" type="submit" class="btn btn-dark">Invia</button>
+                <a class="btn btn-danger" href="{{route('admin.dishes.index')}}">Torna indietro</a>
 
             </div>
             
