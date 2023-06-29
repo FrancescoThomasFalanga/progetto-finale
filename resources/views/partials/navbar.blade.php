@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <li class="nav-item d-flex">
+                <li class="nav-item d-flex gap-2">
                     <a class="nav-link" href="{{route('admin.restaurants.index')}}">Il tuo ristorante</a>
                     <a class="nav-link" href="{{route('admin.orders.index')}}">I tuoi ordini</a>
                     <a class="nav-link" href="{{route('admin.stats')}}">Statistiche</a>
