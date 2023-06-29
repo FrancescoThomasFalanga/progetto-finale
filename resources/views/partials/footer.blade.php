@@ -8,7 +8,7 @@
         <div class="footer-center">
             <div class="links">
                 <p><strong class="text-white">Informazioni</strong></p>
-                <ul>
+                <ul class="p-0">
                     <li v-for="link in footerLink.links"><a href="#">Bookmark</a></li>
                     <li v-for="link in footerLink.links"><a href="#">Features</a></li>
                     <li v-for="link in footerLink.links"><a href="#">Sitemap</a></li>
@@ -18,7 +18,7 @@
             </div>
             <div class="links">
                 <p><strong class="text-white">Extra</strong></p>
-                <ul>
+                <ul class="p-0">
                     <li v-for="link in footerLink.links"><a href="#">Delivery</a></li>
                     <li v-for="link in footerLink.links"><a href="#">Cart</a></li>
                     <li v-for="link in footerLink.links"><a href="#">Terms conditions</a></li>
