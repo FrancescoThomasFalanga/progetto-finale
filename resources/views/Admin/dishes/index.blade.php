@@ -1,29 +1,26 @@
 @extends('layouts/app')
 
 @section('content')
-    <div class="container d-flex justify-content-center gap-4 py-4 flex-wrap">
+    <div class="container d-flex justify-content-center align-items-center gap-4 py-4 flex-wrap">
 
         @foreach ($dishes as $dish)
-            <div class="card border-5 rounded-5" style="width: 18rem;">
+            <div class="card cards border-5 rounded-5 background">
                 @if ($dish->cover_image != 'https://static.vecteezy.com/ti/vettori-gratis/p1/5359703-cibo-icone-pixel-perfetto-illustrazione-vettoriale.jpg')
-                    <img class="rounded-0 rounded-top-5" src="{{ asset('storage/' . $dish->cover_image) }}" class="card-img-top" alt="...">
+                    <img class="card-img-top rounded-0 rounded-top-5" src="{{ asset('storage/' . $dish->cover_image) }}" alt="...">
                 @else
-                    <img class="rounded-0 rounded-top-5" src="{{ $dish->cover_image }}" class="card-img-top" alt="...">
+                    <img class="card-img-top rounded-0 rounded-top-5" src="{{ $dish->cover_image }}" alt="...">
                 @endif
                 <div class="card-body">
-                    <h5 class="card-title">{{ $dish->name }}</h5>
+                    <h5 class="card-title label-bg text-white">{{ $dish->name }}</h5>
                     <p class="card-text">{{ $dish->description }}</p>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Prezzo: {{ $dish->price }}€</li>
-                    <li class="list-group-item">Disponibilità: {{ $dish->availability ? 'Disponibile' : 'Non disponibile' }}
-                    </li>
-                    <li class="list-group-item">Intolleranza: {{ $dish->intolerance == null ? 'Nessuna' : $dish->intolerance }}
-                    </li>
+                <ul class="list-group list-group-flush bg-dark">
+                    <li class="list-group-item bg-dark text-white">Prezzo: {{ $dish->price }}€</li>
+                    <li class="list-group-item bg-dark text-white">Disponibilità: {{ $dish->availability ? 'Disponibile' : 'Non disponibile' }}</li>
+                    <li class="list-group-item bg-dark text-white">Intolleranza: {{ $dish->intolerance == null ? 'Nessuna' : $dish->intolerance }}</li>
                 </ul>
-                <div class="card-body d-flex gap-3 align-items-center ">
-                    <a href="{{ route('admin.dishes.edit', $dish->slug) }}"
-                        class="card-link btn btn-primary fw-bold">Modifica piatto</a>
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <a href="{{ route('admin.dishes.edit', $dish->slug) }}" class="card-link btn btn-dark fw-bold">Modifica piatto</a>
 
                     <button class="btn btn-danger fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#dishModal{{ $dish->id }}">
                         Elimina
@@ -32,16 +29,16 @@
             </div>
 
             @if(isset($dish))
-            <div class="modal fade text-primary" id="dishModal{{$dish->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <div class="modal fade text-white fw-bold" id="dishModal{{$dish->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content bg-dark">
                         <div class="modal-header">
                             <h1 class="modal-title fs-4" id="exampleModalLabel">Elimina piatto</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Sicuro di voler eliminare il piatto?
+                            Sicuro di voler eliminare il piatto <span class="text-danger fw-bold">{{ $dish->name }}</span> ?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary delete-btn"
@@ -50,7 +47,7 @@
                                 @csrf
                                 @method('DELETE')
     
-                                <button type="submit" class="btn btn-danger">ELIMINA<span></span></button>
+                                <button type="submit" class="btn btn-danger text-dark">ELIMINA<span></span></button>
                             </form>
                         </div>
                     </div>
@@ -59,11 +56,8 @@
             @endif
             
         @endforeach
-
-
-
     </div>
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center mb-5">
         <a class="btn btn-outline-warning" href="{{ route('admin.dishes.create') }}">Aggiungi un piatto</a>
     </div>
 @endsection
