@@ -33,7 +33,7 @@ class RestaurantApiController extends Controller
             ->join('types', 'restaurant_type.type_id', '=', 'types.id')
             ->whereIn('types.id', $requestData['type_id'] )
             ->distinct()
-            ->paginate(6);
+            ->paginate(3);
 
             if(count($restaurant) == 0) {
                 return response()->json([
@@ -44,7 +44,7 @@ class RestaurantApiController extends Controller
         }else{
 
             $restaurant = Restaurant::with('dishes', 'types')
-                ->paginate(6);
+                ->paginate(3);
             
         }
         
