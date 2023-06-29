@@ -7,7 +7,7 @@
         <div class="container">
             <div class="container-img">
 
-                <img src="http://localhost:5173/images/logo-deliveboo.png" alt="">
+                <img src="{{ Vite::asset('resources/img/logo-deliveboo.png') }}" alt="">
             </div>
             <span>Il tuo Codice Ordine: <mark>{{ $lead->messaggio }}</mark> </span> 
             
